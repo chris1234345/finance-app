@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1716556164163,
+      "tag": "0000_wandering_master_chief",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1716557032609,
+      "tag": "0001_natural_miracleman",
+      "breakpoints": true
+    }
+  ]
+}

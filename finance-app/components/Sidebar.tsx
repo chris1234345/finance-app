@@ -6,11 +6,20 @@ import { User, UsersRound } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {usePathname } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
+import Dashboard from './Dashboard'
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger
+} from "@/components/ui/sheet"
+import {useMedia} from 'react-use'
+import { WelcomeMsg } from './WelcomeMsg'
 
 const Sidebar = () => {
     const {user} = useUser();
     const pathname = usePathname();
+    const [isOpen, setIsOpen] = useState(false);
   return (
 
     <div className='flex h-screen w-full font-inter'>
@@ -46,21 +55,24 @@ const Sidebar = () => {
         
     </main>
 
-    <main className="flex-1 p-4">
-        <div className="flex justify-between px-4">
-        </div>
-        <section>
-          <h2 className="text-xl font-semibold">
-            Welcome to FinanceEase <span>{user ? user.firstName : 'Guest'}</span>
-          </h2>
-          <p className="text-gray-600 mt-2">
-            This is a simple finance app to help you manage your finances.
-          </p>
-        </section>
-      </main>
+    <div className='flex-1 relative'>
+                <header className="absolute top-0 left-0 w-full h-2/5 bg-gradient-to-b from-green-700 to-green-500 px-4 py-8">
+                   <div className='max-w-screen-2xl mx-auto'>
+                    <div className='w-full lfex items-center justify-between mb-14'>
+                      <div className='flex items-center lg:gap-x-16'>
+
+                      </div>
+                    </div>
+                    <WelcomeMsg />
+                   </div>
+                </header>
+                <div className='mt-[30%] p-4'>
+                    <Dashboard />
+                </div>
+            </div>
 
     
-            </div>
+      </div>
   )
 }
 
