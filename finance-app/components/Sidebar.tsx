@@ -13,7 +13,7 @@ import {
   SheetContent,
   SheetTrigger
 } from "@/components/ui/sheet"
-import {useMedia} from 'react-use'
+import {useMedia, useMountedState} from 'react-use'
 import { WelcomeMsg } from './WelcomeMsg'
 
 const Sidebar = () => {

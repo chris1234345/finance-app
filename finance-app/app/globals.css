@@ -378,3 +378,11 @@
     @apply text-16 font-semibold text-black-2 max-xl:hidden;
   }
 }
+
+
+input#\:r6\:-form-item {
+  border-radius: 10px;
+  display: block;
+  margin-top: 0.25rem;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
