@@ -17,7 +17,9 @@ import { useGetAccounts } from '@/features/accounts/api/use-get-accounts'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useBulkDeleteAccounts } from '@/features/accounts/api/use-bulk-delete'
 
-
+type Props = {
+  children: React.ReactNode; 
+}
 
 const AccountsPage = () => {
   const newAccount = useNewAccount();
@@ -52,17 +54,7 @@ const AccountsPage = () => {
 
   return (
     <div className="flex-1 relative">
-    <header className=" top-0 left-0 w-full h-2/5 bg-gradient-to-b from-green-700 to-green-500 px-4 py-8">
-        <div className='max-w-screen-2xl mx-auto'>
-            <div className='w-full flex items-center justify-between mb-14'>
-                <div className='flex items-center lg:gap-x-16'>
-                    {/* Add any additional content for the header here */}
-                    <h1>Welcome back Chris</h1> 
-
-                </div>
-            </div>
-        </div>
-    </header>
+   
 
 
     <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24 bg-white rounded">

@@ -1,12 +1,11 @@
 import { Hono } from "hono";
 import { db } from "@/db/drizzle";
-import { categories, insertCategorySchema  } from "@/db/schema";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { and, eq, inArray } from "drizzle-orm";
 import {zValidator} from "@hono/zod-validator"
 import {createId} from "@paralleldrive/cuid2";
 import { z } from "zod";
-import { error } from "console";
+import { categories, insertCategorySchema  } from "@/db/schema";
 
 const app = new Hono()
     .get(

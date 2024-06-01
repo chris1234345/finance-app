@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import {Checkbox} from "@/components/ui/checkbox"
 import { client } from "@/lib/hono"
-import { Actions } from "@/app/(auth)/accounts/actions"
+import { Actions } from "@/app/(dashboard)/accounts/actions"
 
 export type ResponseType = InferResponseType<typeof client.api.accounts.$get, 200>["data"][0];
 

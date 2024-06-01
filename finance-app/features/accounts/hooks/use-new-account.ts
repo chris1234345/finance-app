@@ -8,7 +8,13 @@ type NewAccountState = {
 
 
 export const useNewAccount = create<NewAccountState>((set) => ({
-    isOpen: false,
-    onOpen: () => set({ isOpen: true }),
-    onClose: () => set({ isOpen: false }),
-}))
+    isOpen: true,
+    onOpen: () => {
+      console.log('Opening account form');
+      set({ isOpen: true });
+    },
+    onClose: () => {
+      console.log('Closing account form');
+      set({ isOpen: false });
+    },
+  }));

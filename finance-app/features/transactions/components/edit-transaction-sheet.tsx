@@ -6,13 +6,13 @@ import {Sheet,
 } from '@/components/ui/sheet'
 import { insertCategorySchema } from '@/db/schema'
 import { z } from 'zod'
-import { useOpenCategory } from '@/features/accounts copy/hooks/use-open-category'
+import { useOpenCategory } from '@/features/categories/hooks/use-open-category'
 import { Loader2 } from 'lucide-react'
 import { useConfirm } from '@/hooks/use-confirm'
-import { CategoryForm } from './category-form'
-import { useGetCategory } from '../api/use-get-category'
-import { useEditCategory } from '../api/use-edit-category'
-import { useDeleteCategory } from '../api/use-delete-category'
+import { CategoryForm } from '../../categories/components/category-form'
+import { useGetCategory } from '../../categories/api/use-get-category'
+import { useEditCategory } from '../../categories/api/use-edit-category'
+import { useDeleteCategory } from '../../categories/api/use-delete-category'
 
 const formSchema = insertCategorySchema.pick({
     name: true,
@@ -20,7 +20,7 @@ const formSchema = insertCategorySchema.pick({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export const EditCategorySheet = () => {
+export const EditTransactionSheet = () => {
     const {isOpen, onClose, id} = useOpenCategory();
 
     const [ConfirmDialog, confirm] = useConfirm(

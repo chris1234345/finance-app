@@ -8,9 +8,9 @@ import {
     DropdownMenu,
 } from "@/components/ui/dropdown-menu"
 import { Edit, MoreHorizontal, Trash } from "lucide-react"
-import { useOpenAccount } from "@/features/accounts copy/hooks/use-open-category"
 import { useDeleteAccount } from "@/features/accounts/api/use-delete-accounts"
 import { useConfirm } from "@/hooks/use-confirm"
+import { useOpenAccount } from "@/features/accounts/hooks/use-open-account"
 
 type Props = {
     id:string

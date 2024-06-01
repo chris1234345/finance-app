@@ -6,12 +6,15 @@ import { NewAccontSheet } from "@/components/new-account-sheet"
 
 import { EditAccontSheet } from "@/components/edit-account-sheet"
 
-import { NewCategorySheet } from "@/features/accounts copy/components/new-category-sheet copy"
-import { EditCategorySheet } from "@/features/accounts copy/components/edit-category-sheet"
+import { EditCategorySheet } from "@/features/categories/components/edit-category-sheet"
+import { NewCategorySheet } from "@/features/categories/components/new-category-sheet"
+
+import { NewTransactionSheet } from "@/features/transactions/components/new-transaction-sheet"
+
 
 export const SheetProvider = () => {
-    const isMounted = useMountedState();
-    if(!isMounted()) return null;
+    // const isMounted = useMountedState();
+    // if(!isMounted()) return null;
 
     return (
         <>
@@ -19,6 +22,9 @@ export const SheetProvider = () => {
         <EditAccontSheet /> 
         <NewCategorySheet />
         <EditCategorySheet />
+
+        <NewTransactionSheet />
+        
         </>
     )
 }
