@@ -6,6 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+
 type Period = {
   from: string | Date | undefined;
   to: string | Date | undefined;
@@ -24,4 +25,15 @@ export function formatDateRange (period?:Period) {
   }
 
   return format(period.from, "LLL dd, y")
+
 }
+
+
+
+export function convertAmountFromMiliunits(amount: number) {
+  return amount / 1000;
+}
+
+export function convertAmountToMiliunits(amount: number) {
+  return amount * 1000;
+} 

@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1716556164163,
-      "tag": "0000_wandering_master_chief",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1716557032609,
-      "tag": "0001_natural_miracleman",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1716930864145,
-      "tag": "0002_cheerful_felicia_hardy",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1716971019099,
-      "tag": "0003_safe_harrier",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1716991191460,
-      "tag": "0004_cynical_starhawk",
+      "when": 1717233192582,
+      "tag": "0000_tricky_puck",
       "breakpoints": true
     }
   ]

@@ -9,10 +9,14 @@ import { z } from 'zod'
 import { useOpenCategory } from '@/features/categories/hooks/use-open-category'
 import { Loader2 } from 'lucide-react'
 import { useConfirm } from '@/hooks/use-confirm'
-import { CategoryForm } from '../../categories/components/category-form'
-import { useGetCategory } from '../../categories/api/use-get-category'
-import { useEditCategory } from '../../categories/api/use-edit-category'
-import { useDeleteCategory } from '../../categories/api/use-delete-category'
+// import { useGetCategory } from '../api/use-get-category'
+// import { useEditCategory } from '../api/use-edit-category'
+// import { useDeleteCategory } from '../api/use-delete-category'
+
+import { useGetCategory } from '@/features/categories/api/use-get-category'
+import { useEditCategory } from '@/features/categories/api/use-edit-category'
+import { useDeleteCategory } from '@/features/categories/api/use-delete-category'
+import { CategoryForm } from '@/features/categories/components/category-form'
 
 const formSchema = insertCategorySchema.pick({
     name: true,
@@ -20,7 +24,7 @@ const formSchema = insertCategorySchema.pick({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export const EditTransactionSheet = () => {
+export const EditCategorySheet = () => {
     const {isOpen, onClose, id} = useOpenCategory();
 
     const [ConfirmDialog, confirm] = useConfirm(

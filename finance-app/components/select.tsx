@@ -13,36 +13,38 @@ type Props = {
     placeholder?: string;
 }
 
-export const Select = ({
+
+export const Select =({
     value,
+    placeholder,
     onChange,
     disabled,
     onCreate,
-    options = [],
-    placeholder,
+    options = []
 }: Props) => {
-    
+
     const onSelect = (
-        option: SingleValue<{label: string; value: string}>
+    options: SingleValue<{label:string, value:string}>
     ) => {
-        onChange(option?.value);
-    }
+        onChange(options?.value);
+    };
 
     const formattedValue = useMemo(() => {
         return options.find((option) => option.value === value);
-    }, [options, value]);
-    return (
+    }, [options, value])
 
-        <CreateableSelect 
+    return (
+        <CreateableSelect
         placeholder={placeholder}
         className="text-sm h-10"
+
         styles={{
             control: (base) => ({
                 ...base,
-                borderColor: '#e2e8f0',
-                ":hover": {
+                borderColor: "#e2e8f0",
+                ":hover":{
                     borderColor: "#e2e8f0",
-                }
+                },
             })
         }}
         value={formattedValue}
