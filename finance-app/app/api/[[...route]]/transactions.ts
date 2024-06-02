@@ -173,18 +173,18 @@ const app = new Hono()
             )
 
             const data = await db
-                .with(transactionsToDelete)
+            .with(transactionsToDelete)
                 .delete(transactions)
                 .where(
-                    inArray(transactions.id, sql`select id from ${transactionsToDelete}`),
-                
+                    inArray(transactions.id, sql `(select id from ${transactionsToDelete})`)
                 )
                 .returning({
-                    id: transactions.id,
+                    id:transactions.id,
                 })
-                
-                return c.json({data});
-        },
+
+                return c.json({data})
+
+    },
     )
 
     .post(

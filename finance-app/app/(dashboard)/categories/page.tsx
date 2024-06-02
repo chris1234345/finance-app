@@ -99,7 +99,7 @@ const CategoriesPage = ({children} :Props) => {
         <DataTable 
         columns={columns} 
         data={categories} 
-        filterKey='name'
+        filterKey='date'
         onDelete={(row) => {
           const ids = row.map((r) => r.original.id)
           deleteCategories.mutate({ids});

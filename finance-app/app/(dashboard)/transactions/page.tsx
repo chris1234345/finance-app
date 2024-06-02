@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Card,
   CardContent,
@@ -11,19 +11,33 @@ import {
 import { Button } from '@/components/ui/button'
 import { Loader2, Plus } from 'lucide-react'
 import { useNewAccount } from '@/features/accounts/hooks/use-new-account'
-import {columns } from './columns'
+import{ columns} from './columns'
 import { DataTable } from '@/components/data-table'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useBulkDeleteAccounts } from '@/features/accounts/api/use-bulk-delete'
 import { useNewTransaction } from '@/features/transactions/hooks/use-new-tranzation'
 import { useGetTransactions } from '@/features/transactions/api/use-get-transactions'
 import { transactions } from '@/db/schema'
 import { useBulkDeleteTransaction } from '@/features/transactions/api/use-bulk-transactions'
+import { UploadButton } from './upload-button'
 type Props = {
   children: React.ReactNode; 
 }
 
+enum VARIANTS {
+  LIST = "LIST",
+  IMPORT="IMPORT"
+}
+
+const INITIAL_IMPORT_RESULTS = {
+  data: [],
+  errors: [],
+  meta: {},
+}
+
 const TransactionsPage = () => {
+
+  const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST)
+
   const newTransaction = useNewTransaction();
   const deleteTransactions = useBulkDeleteTransaction()
   const transactionsQuery = useGetTransactions();
@@ -53,6 +67,16 @@ const TransactionsPage = () => {
     )
   }
 
+  if (variant === VARIANTS.IMPORT) {
+    return (
+      <>
+      <div>
+        This is a screen import
+      </div>
+      </>
+    )
+  }
+
 
   return (
     <div className="flex-1 relative">
@@ -69,13 +93,14 @@ const TransactionsPage = () => {
             <Plus className='size-4 mr-2'/>
           Add new
           </Button>
+          <UploadButton onUpload={() => {}}/>
         </CardHeader>
         <CardContent>
 
         <DataTable 
         columns={columns} 
         data={transactions} 
-        filterKey='name'
+        filterKey='payee'
         onDelete={(row) => {
           const ids = row.map((r) => r.original.id)
           deleteTransactions.mutate({ids});

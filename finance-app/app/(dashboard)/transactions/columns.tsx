@@ -5,10 +5,12 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import {Checkbox} from "@/components/ui/checkbox"
 import { client } from "@/lib/hono"
-import { Actions } from "@/app/(dashboard)/accounts/actions"
+import { Actions } from "./actions"
 import { format } from "date-fns"
 import { formatCurrency } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { AccountColumn } from "./account-column"
+import { CategoryColumn } from "./category-column"
 
 export type ResponseType = InferResponseType<typeof client.api.transactions.$get, 200>["data"][0];
 
@@ -52,13 +54,13 @@ export const columns: ColumnDef<ResponseType>[] = [
         )
   },
   cell: ({row}) => {
-    const date = row.getValue("date") as Date;
+    const date = row.getValue("date") as Date
     return (
       <span>
-        {format(date, "MMM dd, yyyy")}
-      </span>
-    )
-  }
+        {format(date, "dd MMMM, yyyy")}
+    </span>
+  )
+}
 },
 {
   accessorKey: "category",
@@ -74,15 +76,16 @@ export const columns: ColumnDef<ResponseType>[] = [
       )
 },
 cell: ({row}) => {
+  const date = row.getValue("date") as Date
   return (
-    <span>
-      {row.original.category}
-    </span>
-  )
+    <CategoryColumn 
+    id={row.original.id}
+    category={row.original.category}
+    categoryId={row.original.categoryId}
+    />
+)
 }
-
 },
-
 {
   accessorKey: "payee",
   header: ({ column }) => {
@@ -95,8 +98,7 @@ cell: ({row}) => {
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
-},
-
+}
 },
 {
   accessorKey: "amount",
@@ -115,14 +117,38 @@ cell: ({row}) => {
   const amount = parseFloat(row.getValue("amount"))
   return (
     <Badge
-    variant={amount < 0 ? "destructive" : "default"}
-    className="text-xs font-medium px-3.5 py-2.5"
+    // variant={amount < 0 ? "secondary" : "primary"}
+    className={`text-xs font-medium px-3.5 py-2.5 ${amount < 0 ? 'bg-red-500 text-white hover:bg-red-500 hover:text-white' : 'bg-black text-white hover:bg-black hover:text-white'}`}
     >
       {formatCurrency(amount)}
-    </Badge>
-  )
+  </Badge>
+)
 }
-
+},
+{
+  accessorKey: "account",
+  header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Account
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+},
+cell: ({row}) => {
+  const date = row.getValue("date") as Date
+  return (
+    <span>
+     <AccountColumn 
+     account={row.original.account}
+     accountId={row.original.accountId}
+     />
+  </span>
+)
+}
 },
 {
   id: "actions",
