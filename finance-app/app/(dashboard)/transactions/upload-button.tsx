@@ -12,7 +12,7 @@ const {CSVReader} = useCSVReader();
 
 return (
     <CSVReader onDrop={onUpload}>
-        {({getRootProps}:any) => {
+        {({getRootProps}:any) => (
             <Button
             size="sm"
             className="w-full lg:w-auto bg-black text-white hover:bg-black-900"
@@ -21,7 +21,7 @@ return (
             <Upload className="size-4 mr-2"/>
             Import
             </Button>
-        }}
+        )}
     </CSVReader>
 )
 }
