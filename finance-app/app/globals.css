@@ -382,3 +382,7 @@ input#\:r6\:-form-item {
   margin-top: 0.25rem;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+
+.text-white {
+  color: black!important;
+}

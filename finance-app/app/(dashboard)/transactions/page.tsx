@@ -1,5 +1,6 @@
 "use client"
 
+import { transactions as TransactionSchema } from '@/db/schema'
 import React, { useState } from 'react'
 import {
   Card,
@@ -16,9 +17,12 @@ import { DataTable } from '@/components/data-table'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useNewTransaction } from '@/features/transactions/hooks/use-new-tranzation'
 import { useGetTransactions } from '@/features/transactions/api/use-get-transactions'
-import { transactions } from '@/db/schema'
 import { useBulkDeleteTransaction } from '@/features/transactions/api/use-bulk-transactions'
 import { UploadButton } from './upload-button'
+import { ImportCard } from './import-card'
+import { useSelectAccount } from '@/features/accounts/hooks/use-select-account'
+import { toast } from 'sonner'
+import { useBulkCreateTransaction } from '@/features/transactions/api/use-bulk-create-transactions'
 type Props = {
   children: React.ReactNode; 
 }
@@ -35,16 +39,50 @@ const INITIAL_IMPORT_RESULTS = {
 }
 
 const TransactionsPage = () => {
+  const [AccountDialog, confirm] = useSelectAccount();
 
   const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST)
+  const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS);
+
+  const onUpload = (results: typeof INITIAL_IMPORT_RESULTS) => {
+    console.log({results})
+    setImportResults(results);
+    setVariant(VARIANTS.IMPORT)
+  };
+
+  const onCancelImport = () => {
+    setImportResults(INITIAL_IMPORT_RESULTS);
+    setVariant(VARIANTS.LIST);
+  }
 
   const newTransaction = useNewTransaction();
+  const bulkCreateMutation = useBulkCreateTransaction();
   const deleteTransactions = useBulkDeleteTransaction()
   const transactionsQuery = useGetTransactions();
   const transactions = transactionsQuery.data || [];
   
 
   const isDisabled = transactionsQuery.isLoading || deleteTransactions.isPending;
+
+  const onSubmitImport = async (
+    values: typeof TransactionSchema.$inferInsert[],
+  ) => {
+    const accountId = await confirm();
+    if(!accountId) {
+      return toast.error("Please select an account to continue")
+    }
+
+    const data = values.map((value) => ({
+      ...value,
+      accountId: accountId as string,
+    }))
+
+    bulkCreateMutation.mutate(data, {
+      onSuccess: () => {
+        onCancelImport();
+      }
+    });
+  };
 
   if(transactionsQuery.isLoading) {
     return (
@@ -70,9 +108,12 @@ const TransactionsPage = () => {
   if (variant === VARIANTS.IMPORT) {
     return (
       <>
-      <div>
-        This is a screen import
-      </div>
+      <AccountDialog/>
+      <ImportCard 
+      data={importResults.data}
+      onCancel={onCancelImport}
+      onSumbit={onSubmitImport}
+      />
       </>
     )
   }
@@ -89,11 +130,13 @@ const TransactionsPage = () => {
           <CardTitle className='text-xl line-clamp-1'>
         Transaction history
           </CardTitle>
-          <Button onClick={newTransaction.onOpen} className='bg-black text-white rounded sm'>
+          <div className='flex flex-col lg:flex-row items-center gap-x-2 gap-y-2'>
+          <Button onClick={newTransaction.onOpen} className='bg-black text-white rounded w-full lg:w-auto' size="sm">
             <Plus className='size-4 mr-2'/>
           Add new
           </Button>
-          <UploadButton onUpload={() => {}}/>
+          <UploadButton onUpload={onUpload}/>
+          </div>
         </CardHeader>
         <CardContent>
 

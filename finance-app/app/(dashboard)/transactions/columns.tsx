@@ -118,7 +118,7 @@ cell: ({row}) => {
   return (
     <Badge
     // variant={amount < 0 ? "secondary" : "primary"}
-    className={`text-xs font-medium px-3.5 py-2.5 ${amount < 0 ? 'bg-red-500 text-white hover:bg-red-500 hover:text-white' : 'bg-black text-white hover:bg-black hover:text-white'}`}
+    className={`text-xs font-medium px-3.5 py-2.5 k{amount < 0 ? 'bg-red-500 text-white hover:bg-red-500 hover:text-white' : 'bg-black text-white hover:bg-black hover:text-white'}`}
     >
       {formatCurrency(amount)}
   </Badge>

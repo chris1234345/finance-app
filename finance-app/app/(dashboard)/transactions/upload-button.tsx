@@ -11,11 +11,11 @@ export const UploadButton = ({onUpload}: Props) => {
 const {CSVReader} = useCSVReader();
 
 return (
-    <CSVReader onDrop={onUpload}>
+    <CSVReader onUploadAccepted={onUpload}>
         {({getRootProps}:any) => (
             <Button
             size="sm"
-            className="w-full lg:w-auto bg-black text-white hover:bg-black-900"
+            className="w-full lg:w-auto bg-black text-white hover:bg-black-900 rounded"
             {...getRootProps()}
             >
             <Upload className="size-4 mr-2"/>
