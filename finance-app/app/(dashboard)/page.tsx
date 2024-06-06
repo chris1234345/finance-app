@@ -2,6 +2,7 @@
 
 import Dashboard from "@/components/Dashboard"
 import Header from "@/components/Header"
+import { DataCharts } from "@/components/dataa-charts"
 import { DataGrid } from "@/components/datagrid"
 import { Button } from "@/components/ui/button"
 import { useNewAccount } from "@/features/accounts/hooks/use-new-account"
