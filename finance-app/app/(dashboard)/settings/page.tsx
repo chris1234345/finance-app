@@ -1,9 +1,12 @@
 import React from 'react'
+import { SettingsCard } from './settings-card'
 
-const page = () => {
+const Settingspage = () => {
   return (
-    <div>page</div>
+    <div className='max-w-screen-2xl mx-auto w-full pb-10 -mt-24'>
+      <SettingsCard />
+      </div>
   )
 }
 
-export default page
+export default Settingspage
