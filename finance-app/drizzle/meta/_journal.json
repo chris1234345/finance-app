@@ -8,6 +8,20 @@
       "when": 1717233192582,
       "tag": "0000_tricky_puck",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1717835774087,
+      "tag": "0001_woozy_thunderball",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1717873226222,
+      "tag": "0002_romantic_toxin",
+      "breakpoints": true
     }
   ]
 }
