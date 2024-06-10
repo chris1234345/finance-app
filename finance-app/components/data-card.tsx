@@ -89,7 +89,8 @@ export const DataCard = ({
                     decimals={2}
                     decimalPlaces={2}
                     duration={1}
-                    formattingFn={formatCurrency}
+                    // formattingFn={formatCurrency}
+                    prefix="RON"
                     />
                 </h1>
                 <p className={cn(

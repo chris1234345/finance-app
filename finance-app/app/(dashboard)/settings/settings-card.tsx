@@ -15,6 +15,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useGetConnectedBank } from '@/features/plaid/api/use-get-connected-bank';
 import { PlaidConnect } from '@/features/plaid/components/plaid-connect';
 import { PlaidDisconnect } from '@/features/plaid/components/plaid-disconnect';
+import { useGetSubscription } from '@/features/subscriptions/api/use-get-subscription';
 import { SubscriptionCheckout } from '@/features/subscriptions/components/subscriptions-checkout';
 
  import { cn } from '@/lib/utils';
@@ -27,9 +28,14 @@ export const SettingsCard = () => {
 
     } = useGetConnectedBank();
 
-    const subscription = null;
+    const {
+        data: subscription,
+        isLoading: isLoadingSubscription,
 
-    if(isLoadingConnectedBank){
+    } = useGetSubscription();
+
+
+    if(isLoadingConnectedBank || isLoadingSubscription){
         return(
             <Card className='border-none drop-shadow-sm bg-white rounded'>
             <CardHeader>
@@ -88,14 +94,11 @@ export const SettingsCard = () => {
                             !subscription && "text-muted-foreground",
                         )}>
                                     {subscription
-                                    ? "Subscription active"
+                                    ? `Subscription ${subscription.status}`
                                     : "No subscription active"
                                     }
                         </div>
-                        {subscription
-                        ? <SubscriptionCheckout />
-                        : <SubscriptionCheckout />
-                        }
+                         <SubscriptionCheckout />
                     </div>
                 </div>
 
